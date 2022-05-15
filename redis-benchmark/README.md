@@ -1,5 +1,5 @@
 ## 第五次作业
-1. 使用 redis benchmark 工具, 测试 10 20 50 100 200 1k 5k 字节 value 大小，redis get set 性能。
+#### 1. 使用 redis benchmark 工具, 测试 10 20 50 100 200 1k 5k 字节 value 大小，redis get set 性能。
 
 利用redis-benchmark 命令来测试
 ```
@@ -12,9 +12,12 @@ redis-benchmark -h 127.0.0.1 -p 6383 -d 20 -t get,set
 
 value size (byte) | set  性能 | get  性能
 ---|---|---
-10 | 100000 requests completed in 0.54 seconds| 100000 requests completed in 0.50 seconds
-20 | 100000 requests completed in 0.54 seconds| 100000 requests completed in 0.50 seconds
-50 | 100000 requests completed in 0.55 seconds| 100000 requests completed in 0.50 seconds
+10 | 10w请求完成需 0.54s，| 10w请求完成需0.50s
+20 | 10w请求完成需 0.54s | 10w请求完成需0.50s
+50 | 10w请求完成需 0.55s | 10w请求完成需0.50s
+200 | 10w请求完成需 0.54s，吞吐量总数 185185.17req/s，请求平均延迟0.163ms | 10w请求完成需 0.51s,吞吐量总数197238.64req/s，请求平均延迟0.145ms
+1k | 10w请求完成需 0.54s，吞吐量总数 184842.88req/s，请求平均延迟0.166ms | 10w请求完成需 0.51s,吞吐量总数196850.39req/s，请求平均延迟0.147ms
+5k | 10w请求完成需 0.57s，吞吐量总数 176366.86req/s，请求平均延迟0.174ms | 10w请求完成需 0.55s,吞吐量总数182815.36req/s，请求平均延迟0.161ms
 
+#### 2. 写入一定量的 kv 数据, 根据数据大小 1w-50w 自己评估, 结合写入前后的 info memory 信息 , 分析上述不同 value 大小下，平均每个 key 的占用内存空间。
 
-2. 写入一定量的 kv 数据, 根据数据大小 1w-50w 自己评估, 结合写入前后的 info memory 信息 , 分析上述不同 value 大小下，平均每个 key 的占用内存空间。
