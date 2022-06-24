@@ -43,7 +43,7 @@ rabc 分为认证、授权。 Api-gateWay 认证通过后，使用JWT 在header 
 
 goroutine 泄露，就是goroutine 没有channel 可以发送，而一直阻塞着，一直卡着。比如三个goroutine 往一个无缓存的channel中发送数据，没线程来接收channel的数据，剩下两个就卡住了。
 
-#### 4. 内存模型
+#### 内存模型
 happens before 先行发生，A操作发生在B 操作之前，如果不确定执行顺序就是说AB 并发，存在cpu 指令buffer，为了提高cpu的性能，所以程序并发执行，之间的指令执行顺序和你看到的不一样（经过了指令重排）
 为了使多个线程操作串行化，引入锁的概念。
 
@@ -54,7 +54,7 @@ happens before 先行发生，A操作发生在B 操作之前，如果不确定�
 
 #### 实践练习
 基于 errgroup 实现一个 http server 的启动和关闭 ，以及 linux signal 信号的注册和处理，要保证能够一个退出，全部注销退出
-* ![作答详见](https://github.com/lics1216/go/blob/main/work_two/main.go)
+* [作答详见](https://github.com/lics1216/go/blob/main/work_two/main.go)
 
 ### 4.go的工程化学习
 实践练习，按照自己的构想，写一个项目满足基本的目录结构和工程，代码需要包含对数据层、业务层、API 注册，以及 main 函数对于服务的注册和启动，信号处理，使用 Wire 构建依赖。可以使用自己熟悉的框架。
