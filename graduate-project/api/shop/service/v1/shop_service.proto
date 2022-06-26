@@ -1,0 +1,196 @@
+syntax = "proto3";
+
+package shop.service.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "api/shop/service/v1;v1";
+
+
+service ShopInterface {
+    rpc Index (IndexReq) returns (IndexReply) {
+        option (google.api.http) = {
+            get: "/v1"
+        };
+    }
+
+    rpc Register (RegisterReq) returns (RegisterReply) {
+        option (google.api.http) = {
+            post: "/v1/register"
+            body: "*"
+        };
+    }
+
+    rpc Login (LoginReq) returns (LoginReply) {
+        option (google.api.http) = {
+            post: "/v1/login"
+            body: "*"
+        };
+    }
+
+    rpc Logout (LogoutReq) returns (LogoutReply) {
+        option (google.api.http) = {
+            post: "/v1/logout"
+            body: "*"
+        };
+    }
+
+    rpc ListBeer (ListBeerReq) returns (ListBeerReply) {
+        option (google.api.http) = {
+            get: "/v1/catalog/beers"
+        };
+    }
+
+    rpc GetBeer (GetBeerReq) returns (GetBeerReply) {
+        option (google.api.http) = {
+            get: "/v1/catalog/beers/{id}"
+        };
+    }
+
+    rpc ListCartItem (ListCartItemReq) returns (ListCartItemReply) {
+        option (google.api.http) = {
+            get: "/v1/cart"
+        };
+    }
+
+    rpc AddCartItem (AddCartItemReq) returns (AddCartItemReply) {
+        option (google.api.http) = {
+            post: "/v1/cart"
+            body: "*"
+        };
+    }
+
+    rpc CreateOrder (CreateOrderReq) returns (CreateOrderReply) {
+        option (google.api.http) = {
+            post: "/v1/orders"
+            body: "*"
+        };
+    }
+
+    rpc ListOrder (ListOrderReq) returns (ListOrderReply) {
+        option (google.api.http) = {
+            get: "/v1/orders"
+        };
+    }
+}
+
+message IndexReq {
+    int64 user_id = 1;
+}
+
+message IndexReply {
+    User user = 1;
+    ListCartItemReply cart = 2;
+    ListBeerReply beer = 3;
+}
+
+message User {
+    int64 id = 1;
+    string username = 2;
+}
+
+message RegisterReq {
+    string username = 1;
+    string password = 2;
+}
+
+message RegisterReply {
+    int64 id = 1;
+}
+
+
+message LoginReq {
+    string username = 1;
+    string password = 2;
+}
+
+message LoginReply {
+    string token = 1;
+}
+
+message LogoutReq {
+
+}
+
+message LogoutReply {
+
+}
+message ListBeerReq {
+    int64 page_num = 1;
+    int64 page_size = 2;
+}
+
+message ListBeerReply {
+    message Beer {
+        message Image {
+            string url = 1;
+        }
+        int64 id = 1;
+        string name = 2;
+        string description = 3;
+        int64 count = 4;
+        repeated Image image = 5;
+    }
+    repeated Beer results = 1;
+}
+
+message GetBeerReq {
+    int64 id = 1;
+}
+
+message GetBeerReply {
+    message Image {
+        string url = 1;
+    }
+    int64 id = 1;
+    string name = 2;
+    string description = 3;
+    int64 count = 4;
+    repeated Image image = 5;
+}
+
+message ListCartItemReq {
+    int64 user_id = 1;
+    int64 page_num = 2;
+    int64 page_size = 3;
+}
+
+message ListCartItemReply {
+    message Item {
+        int64 item_id = 1;
+        int64 quantity = 2;
+    }
+    repeated Item items = 1;
+
+}
+
+message AddCartItemReq {
+    int64 user_id = 1;
+    int64 item_id = 2;
+    int64 quantity = 3;
+}
+
+message AddCartItemReply {
+    message Item {
+        int64 item_id = 1;
+        int64 quantity = 2;
+    }
+    repeated Item items = 1;
+}
+
+message CreateOrderReq {
+
+}
+
+message CreateOrderReply {
+
+}
+
+message ListOrderReq {
+    int64 page_num = 1;
+    int64 page_size = 2;
+}
+
+message ListOrderReply {
+
+}

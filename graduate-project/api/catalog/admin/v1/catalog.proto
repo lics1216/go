@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package catalog.admin.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "api/catalog/admin/v1;v1";
+
+
+service CatalogAdmin {
+  rpc CreateBeer (CreateBeerReq) returns (CreateBeerReply) {
+    option (google.api.http) = {
+      post: "/api/v1/catalog/admin"
+      body: "*"
+    };
+  }
+
+  rpc UpdateBeer (UpdateBeerReq) returns (UpdateBeerReply) {
+    option (google.api.http) = {
+      put: "/api/v1/catalog/admin"
+      body: "*"
+    };
+  }
+
+  rpc DeleteBeer (DeleteBeerReq) returns (DeleteBeerReply) {
+    option (google.api.http) = {
+      delete: "/api/v1/cart/admin"
+    };
+  }
+}
+
+
+message CreateBeerReq {
+  message Image {
+    string url = 1;
+  }
+  string name = 1;
+  string description = 2;
+  int64 count = 3;
+  repeated Image image = 4;
+}
+
+message CreateBeerReply {
+  message Image {
+    string url = 1;
+  }
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
+  int64 count = 4;
+  repeated Image image = 5;
+}
+
+message UpdateBeerReq {
+  message Image {
+    string url = 1;
+  }
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
+  int64 count = 4;
+  repeated Image image = 5;
+}
+
+message UpdateBeerReply {
+  message Image {
+    string url = 1;
+  }
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
+  int64 count = 4;
+  repeated Image image = 5;
+}
+
+message DeleteBeerReq {
+  int64 id = 1;
+}
+
+message DeleteBeerReply {
+}
